@@ -122,8 +122,10 @@ highlight PmenuSel		term=reverse ctermbg=27 ctermfg=white
 autocmd FileType c,cpp	iab _li #include <libft.h><c-r>=Eatchar('\s')<CR>
 iab while while ()<Left><c-r>=Eatchar('\s')<CR>
 iab if if ()<Left><c-r>=Eatchar('\s')<CR>
-iab return return ();<Left><Left><c-r>=Eatchar('\s')<CR>
-iab { {<CR>}<Up>
+autocmd	FileType c		iab return return ();<Left><Left><c-r>=Eatchar('\s')<CR>
+autocmd	FileType cpp	iab return return (;<Left><c-r>=Eatchar('\s')<CR>
+autocmd FileType c		iab { {<CR>}<Up>
+autocmd FileType cpp	iab { {<CR><CR>}<Up><bs>
 autocmd FileType c,cpp	iab /. /*<c-r>=Eatchar('\s')<CR>
 autocmd FileType c,cpp	iab ./ */<c-r>=Eatchar('\s')<CR>
 autocmd FileType c,cpp	iab #i #include
@@ -290,12 +292,16 @@ vmap <silent> <s-Up>			<Up><Up><Up>
 
 " Ctrl + Right || Ctrl + Left = Change buffer && Ctrl + Home = NewTab
 
-map <C-right>				:tabnext<CR>i
-map <C-left>				:tabprevious<CR>i
-map <C-Home>				:tabnew ..<CR>
-imap <C-right>				<ESC>:tabnext<CR>i
-imap <C-left>				<ESC>:tabprevious<CR>i
-imap <C-Home>				<ESC>:tabnew ..<CR>
+map <F6>				:tabnext<CR>
+map <F5>				:tabprevious<CR>
+map <C-Home>				:tabnew<CR>
+imap <F6>				:tabnext<CR>
+imap <F5>				:tabprevious<CR>
+imap <C-Home>				:tabnew<CR>
+
+"imap <C-right>				<ESC>:tabnext<CR>i
+"imap <C-left>				<ESC>:tabprevious<CR>i
+"imap <C-Home>				<ESC>:tabnew ..<CR>
 
 " reset cursor position open file
 

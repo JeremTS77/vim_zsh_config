@@ -1,5 +1,17 @@
-stty -ixon
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    .zshrc                                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jelefebv <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/06/16 14:00:31 by jelefebv          #+#    #+#              #
+#    Updated: 2015/06/16 14:02:00 by jelefebv         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+stty -ixon
+export PATH=$PATH:~/bin:~/.brew/bin
 unsetopt beep
 
 if [[ -f ~/\#_my_config/prompt.zsh ]]; then
@@ -200,7 +212,7 @@ function mylockscreen()
 
 function gcc3d()
 {
-	gcc -Wall -Werror -Wextra "$*" -L/usr/X11/lib -lmlx -lXext -lX11 && ./a.out
+	gcc -Wall -Werror -Wextra "$*" -L/usr/lib -lmlx -framework OpenGL -framework AppKit && ./a.out
 }
 
 function cauteur()
@@ -210,17 +222,18 @@ function cauteur()
 
 function libft_cp()
 {
-	cp -r ~/1_Semestre/algorithmie-I/libft ./libft
+	cp -r ~/ProjetFini/libft ./libft
+	mv ./libft/includes/*.h ./includes/
+	rm -rf ./libft/includes
 }
 
 function speedstart()
 {
-	mkdir includes
+	mkdir includes/
 	mkdir srcs
 	libft_cp
-	cp libft/includes/libft.h includes/libft.h
 	echo "" > .gitignore
-	echo "includes/libft.h" >> .gitignore
+#	echo "includes/libft.h" >> .gitignore
 	vi Makefile
 }
 
@@ -239,15 +252,19 @@ function clear_cache()
 {
 	find ~ -name ".DS_Store" -exec rm {} \;
 	rm -rf ~/Library/Caches
-	mkdir ~/Library/Caches
+	rm -rf ~/Library/Keychains
+	rm -rf ~/Library/Google
+	rm -rf ~/Library/Cookies
+	rm -rf ~/Library/Logs
+	rm -rf ~/Library/Account
 	rm -rf ~/Desktop/FL\ Studio.app;clear
 }
 
 function logout_func()
 {
 	clear_cache
-	echo "test"
-	/Applications/helper.app/Contents/MacOS/helper logout
+	echo "Done."
+	exec /Applications/helper.app/Contents/MacOS/helper logout
 }
 
 function pwdsave()
@@ -427,4 +444,7 @@ alias refresh='bitnami'
 alias sql='~/mamp/mysql/bin/mysql -uroot -pyeueteyeieoeuei'
 alias sqlf='sqlf_file'
 
-
+export USER42=jelefebv
+export MAIL42=jelefebv@student.42.fr
+export MAIL=jelefebv@student.42.fr
+export USER=jelefebv

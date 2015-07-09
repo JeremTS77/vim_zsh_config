@@ -1,7 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Volumes/Data/nfs/zfs-student-4/users/2014/jelefebv/.vim/dict'
-let g:netrw_dirhist_2='/Volumes/Data/nfs/zfs-student-4/users/2014/jelefebv/.vim'
-let g:netrw_dirhist_3='/Volumes/Data/nfs/zfs-student-4/users/2014/jelefebv/.vim/plugin'
-let g:netrw_dirhist_4='/Volumes/Data/nfs/zfs-student-4/users/2014/jelefebv/.vim/plugin/42'
-let g:netrw_dirhist_5='/Volumes/Data/nfs/zfs-student-4/users/2014/jelefebv/annee1/lib'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/jeremy/InWork/ft_sh2'
+let g:netrw_dirhist_2='/Users/jeremy/InWork/ft_sh2/srcs'
