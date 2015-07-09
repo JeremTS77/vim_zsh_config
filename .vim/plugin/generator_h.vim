@@ -1,25 +1,18 @@
-"
-" <This plugin generate 42 header>
-" Copyright (C) <2013>  Quentin Perez <qperez42@gmail.com>
-"
-" This file is part of 42-toolkit.
-"
-" 42-toolkit is free software: you can redistribute it and/or modify
-" it under the terms of the GNU General Public License as published by
-" the Free Software Foundation, either version 3 of the License, or
-" (at your option) any later version.
-"
-" This program is distributed in the hope that it will be useful,
-" but WITHOUT ANY WARRANTY; without even the implied warranty of
-" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-" GNU General Public License for more details.
-"
-" You should have received a copy of the GNU General Public License
-" along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"
+" **************************************************************************** "
+"                                                                              "
+"                                                         :::      ::::::::    "
+"    generator_h.vim                                    :+:      :+:    :+:    "
+"                                                     +:+ +:+         +:+      "
+"    By: jcalmat <marvin@42.fr>                     +#+  +:+       +#+         "
+"                                                 +#+#+#+#+#+   +#+            "
+"    Created: 2015/06/20 13:57:33 by jcalmat           #+#    #+#              "
+"    Updated: 2015/06/24 17:12:47 by jcalmat          ###   ########.fr        "
+"                                                                              "
+" **************************************************************************** "
 
-autocmd	BufNewFile	*.h	call	Generate_h_42()
-autocmd BufNewFile	*.php call	Generate_php()
+autocmd	BufNewFile	*.h		call	Generate_h_42()
+autocmd	BufNewFile	*.hpp	call	Generate_hpp()
+autocmd BufNewFile	*.php	call	Generate_php()
 
 function! Generate_h_42()
 	set paste
@@ -44,4 +37,20 @@ function! Generate_php()
 	exe ":normal A" . "!/usr/bin/php\n<?php\n\n?>"
 	%s/!/#!/e
 	exe ":3"
+endfunction
+
+function! Generate_hpp()
+	set paste
+	let l:name = expand('%:f')
+	let l:cmd = '/usr/bin/basename ' . l:name
+	let l:base = expand('%:r:r')
+	let l:newname = system(l:cmd)
+	let l:newname = toupper(l:newname)
+	let l:newname = substitute(l:newname, "\\.", "_", "g")
+	let l:newname = substitute(l:newname, "\\n", "", "g")
+	exe ":normal A" . "#ifndef " . l:newname . "\n# define " . l:newname . "\n\n# include <iostream>\n\nclass " . l:base .  " {\n\npublic:\n\n\t" . l:base . "( void );\n\t" . l:base . "( " . l:base . " const & rhs);\n\n\t" . l:base . " &\toperator=( " . l:base . " const & rhs );\n\n\t~" . l:base . "( void );\n\nprivate:\n\n};\n\n"
+	exe "normal A" . "std::ostream &\toperator<<( std::ostream & o, " . l:base . " const & src );"
+	exe "normal A" . "\n\n#endif"
+	exe ":4"
+	set nopaste
 endfunction

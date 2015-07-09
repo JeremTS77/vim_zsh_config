@@ -153,7 +153,7 @@ endfunction
 function!	Get_files_list()
 	if isdirectory("srcs")
 		cd srcs
-		let filelist = glob('*.c')
+		let filelist = glob('*.{c,cpp}')
 		if len(filelist)
 			let count_line = line(".")
 			for file in split(filelist, '\n')
@@ -189,7 +189,7 @@ endfunction
 function!	Get_files_list_h()
 	if isdirectory("includes")
 		cd includes
-		let filelist = glob('*.h')
+		let filelist = glob('*.{h,hpp}')
 		if len(filelist)
 			let count_line = line(".")
 			for file in split(filelist, '\n')

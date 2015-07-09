@@ -28,7 +28,10 @@ let s:errornorm += matchadd('MyError', '\t\zs \+', -1) " Space Error
 let s:errornorm += matchadd('MyError', ' \+\ze\t', -1) " Space Error
 let s:errornorm += matchadd('MyWarning', '^\n\(\_.\+\)\@!', -1) " Last Line
 
-autocmd Filetype c,cpp	call Norme()
+autocmd BufNewFile,BufRead *.c        call Norme()
+autocmd BufNewFile,BufRead *.h        call Norme()
+
+"autocmd Filetype c,cpp	call Norme()
 
 function Norme()
 	" Format comments norme 42
