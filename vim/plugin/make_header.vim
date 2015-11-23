@@ -18,9 +18,11 @@
 " along with this program.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-autocmd	BufNewFile	*.c	call	Insert_header_42()
-autocmd	BufWritePre	*.c	call	Update_header_42()
-autocmd	BufWritePre	*.h	call	Update_header_42()
+autocmd	BufNewFile	*.c		call	Insert_header_42()
+"autocmd	BufNewFile	*.js	call	Insert_header_42()
+autocmd	BufWritePre	*.c		call	Update_header_42()
+autocmd	BufWritePre	*.h		call	Update_header_42()
+"autocmd	BufWritePre	*.js	call	Update_header_42()
 
 function!	Insert_header_42_add_info(begin, end, nul_line, setline)
 	let l:line = "/*   " . a:begin . ": " . strftime("%Y/%m/%d %H:%M:%S") . " by " . s:author

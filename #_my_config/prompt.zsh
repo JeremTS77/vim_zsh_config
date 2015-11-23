@@ -204,7 +204,7 @@ function ___Right_Prompt()
 #		RPROMPT="${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg} ${git_bg}${fg_color} $(___Check_Git_Branch)  ${reset}"
 #		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg}${reset}"
 #		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${reset}"
-		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${time_fg}${dir_fg}${dir_bg} ${fg_color}%m ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
+		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 	else
 		RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 	fi

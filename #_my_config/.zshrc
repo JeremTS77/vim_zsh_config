@@ -222,7 +222,7 @@ function cauteur()
 
 function libft_cp()
 {
-	cp -r ~/ProjetFini/libft ./libft
+	cp -r ~/InWork/ft_sh2/libft ./libft
 	mv ./libft/includes/*.h ./includes/
 	rm -rf ./libft/includes
 }
@@ -443,8 +443,3 @@ alias refresh='bitnami'
 
 alias sql='~/mamp/mysql/bin/mysql -uroot -pyeueteyeieoeuei'
 alias sqlf='sqlf_file'
-
-export USER42=jelefebv
-export MAIL42=jelefebv@student.42.fr
-export MAIL=jelefebv@student.42.fr
-export USER=jelefebv

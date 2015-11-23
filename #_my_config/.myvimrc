@@ -34,9 +34,9 @@
 " Ctrl + D      == Del Line                                      "
 " Shift + Up    == Speed move Up                                 "
 " Shift + Down  == Speed move Down                               "
-" Ctrl + Left   == Previous Tab                                  "
-" Ctrl + Right  == Next Tab                                      "
-" Ctrl + Home   == New Tab                                       "
+" Shit + Left   == Previous Tab                                  "
+" Shit + Right  == Next Tab                                      "
+" Ctrl + Home   == New Tab (Not implemented)                     "
 " Ctrl + I      == Auto indent file                              "
 " F6            == Toggle Paste                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -137,7 +137,7 @@ autocmd FileType c,cpp	iab #D #define
 autocmd FileType c,cpp	iab ##d # define
 autocmd FileType c,cpp	iab ##D # define
 autocmd FileType c,cpp	iab fmain int		main(int argc, char **argv)<CR>{<CR>return (0);<CR>}<Up><Up><CR>(void)argc;<CR>(void)argv;
-autocmd FileType c,cpp	iab fvmain int		main(void)<CR>{<CR>return (0);<CR>}<Up><Up>
+autocmd FileType c,cpp	iab vmain int		main(void)<CR>{<CR>return (0);<CR>}<Up><Up>
 autocmd FileType c,cpp	iab tst <c-r>=Autostruct()<CR><Up><CR><c-r>=Eatchar('\s')<CR>
 autocmd FileType c,cpp	iab cv <c-r>=Autocastvoid()<CR><c-r>=Eatchar('\s')<CR>
 
@@ -209,9 +209,9 @@ vmap <silent> <C-s>			<Esc>:wq<CR>
 
 " Ctrl + Z == Undo && Ctrl + Y == Redo
 
-map <silent> <c-z>			:undo<CR>gi
-imap <silent> <c-z>			<Esc>:undo<CR>gi
-vmap <silent> <c-z>			<Esc>:undo<CR>gi
+"map <silent> <c-z>			:undo<CR>gi
+"imap <silent> <c-z>			<Esc>:undo<CR>gi
+"vmap <silent> <c-z>			<Esc>:undo<CR>gi
 "map <silent> <c-y>			:redo<CR>gi
 "imap <silent> <c-y>			<Esc>:redo<CR>gi
 "vmap <silent> <c-y>			<Esc>:redo<CR>gi
@@ -292,12 +292,18 @@ vmap <silent> <s-Up>			<Up><Up><Up>
 
 " Ctrl + Right || Ctrl + Left = Change buffer && Ctrl + Home = NewTab
 
-map <F6>				:tabnext<CR>
-map <F5>				:tabprevious<CR>
-map <C-Home>				:tabnew<CR>
-imap <F6>				:tabnext<CR>
-imap <F5>				:tabprevious<CR>
-imap <C-Home>				:tabnew<CR>
+" map <F6>				:tabnext<CR>
+" map <F5>				:tabprevious<CR>
+" map <C-Home>				:tabnew<CR>
+" imap <F6>				:tabnext<CR>
+" imap <F5>				:tabprevious<CR>
+" imap <C-Home>				:tabnew<CR>
+
+map <silent> <S-Left>	:tabprevious<CR>
+map <silent> <S-Right>	:tabnext<CR>
+
+imap <silent> <S-Left>	:tabprevious<CR>
+imap <silent> <S-Right>	:tabnext<CR>
 
 "imap <C-right>				<ESC>:tabnext<CR>i
 "imap <C-left>				<ESC>:tabprevious<CR>i

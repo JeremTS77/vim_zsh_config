@@ -35,6 +35,9 @@ set statusline+=%5*\ %3l/%3L\ %*
 set statusline+=%6*\ %{Paste()}\ %*
 set statusline+=%7*\ %{Input()}\ %*
 set statusline+=%8*\ [%Y]\ %*
+set statusline+=%9*\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %*
+
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 
 autocmd Filetype c,cpp call StatusLine_C()
 
@@ -48,6 +51,7 @@ function! StatusLine_C()
 	set statusline+=%6*\ %{Paste()}\ %*
 	set statusline+=%7*\ %{Input()}\ %*
 	set statusline+=%8*\ [%Y]\ %*
+	set statusline+=%9*\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %*
 endfunction
 
 au InsertLeave * call	Input()
