@@ -8,7 +8,7 @@ install:
 		then \
 			rm  ~/Library/Fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf; \
 	fi;
-	cp "$(HOME)/#_my_config/Meslo\ LG\ S\ Regular\ for\ Powerline.otf" ~/Library/Fonts
+	cp "$(HOME)/#_my_config/Meslo LG S Regular for Powerline.otf" ~/Library/Fonts
 
 reinstall:
 	git stash
