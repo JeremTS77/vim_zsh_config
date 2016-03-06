@@ -1,0 +1,51 @@
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:~/Library/Python/2.7/bin:~/bin/:$HOME/.rvm/bin
+
+#History
+HISTFILE=~/.zsh_history
+SAVEHIST=5000
+HISTSIZE=5000
+setopt inc_append_history
+setopt share_history
+
+autoload -U colors && colors
+
+#conf homemade
+if [[ -f ~/.myconfig/.zshrc ]]; then
+source ~/.myconfig/.zshrc
+fi
+
+#export
+USER=`/usr/bin/whoami`
+export USER
+GROUP=`/usr/bin/id -gn $user`
+export GROUP
+export MAIL
+
+#alias
+alias gccf='gcc -Wall -Wextra -Werror'
+#---
+alias ls='ls --color=yes'
+alias ll='ls -l'
+alias sl='ls'
+alias l='ls -1'
+alias la='ls -a'
+alias lla='ls -la'
+#---
+
+	PS1="[%n@%m][%w] %1~ > "
+function precmd()
+{
+	if [[ -n $(___Check_Git_Branch) ]]; then
+		RPROMPT="[$(___Check_Git_Branch)][%*]@%"
+	else
+		RPROMPT='[%*]'
+			fi
+}
+
+function ___Check_Git_Branch()
+{
+	if gittest=`git status --ignore-submodules` &> /dev/null; then
+		branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+			echo $branch
+			fi
+}
