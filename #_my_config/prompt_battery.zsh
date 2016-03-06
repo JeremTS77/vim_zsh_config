@@ -207,13 +207,22 @@ function ___Right_Prompt()
 #	git_bg=$not_git_bg_color
 #	git_fg=$not_git_fg_color
 
-	RPROMPT="${host_fg}${host_bg}${fg_color} battery : $(battery_charge)%%"
+	power_fg=$host_fg
+	power_bg=$host_bg
 	if [[ 50 > $(battery_charge) &&  $(battery_charge) > 25 ]]; then
-		RPROMPT="${battery_fg}${battery_bg}${fg_color} battery : $(battery_charge)%%"
+		power_fg=$battery_fg
+		power_bg=$battery_bg
+
 	fi
-	if [[ 25 > $(battery_charge) ]]; then
-			RPROMPT="${red_fg}${red_bg}${fg_color} battery : $(battery_charge)%%"
+	if [[ 26 > $(battery_charge) ]]; then
+		power_fg=$red_fg
+		power_bg=$red_bg
 	fi
+	if [[ $(ischarging) == "Yes" ]]; then
+		power_fg=$root_fg
+		power_bg=$root_bg
+	fi
+		RPROMPT="${power_fg}${power_bg}${fg_color} ⚡ $(battery_charge)%% ⚡"
 
 	if [[ -n $(___Check_Git_Branch) ]]; then
 		if [[ -n $(___Check_Git_Status) ]]; then
@@ -221,11 +230,9 @@ function ___Right_Prompt()
 			git_fg=$git_fg_color
 		fi
 #		RPROMPT="${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg} ${git_bg}${fg_color} $(___Check_Git_Branch)  ${reset}"
-#		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg}${reset}"
-#		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${reset}"
 		RPROMPT+=" ${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch) "
-#	else
-#		RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
+	#	else
+	#		RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 	fi
 	RPROMPT+=" ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 }
@@ -252,4 +259,8 @@ function ___Check_Git_Status()
 function battery_charge()
 {
 	printf %.0f $(echo $(ioreg -l -n AppleSmartBattery -r | grep CurrentCapacity | awk '{print $3}') \* 100 / $(ioreg -l -n AppleSmartBattery -r | grep MaxCapacity | awk '{print $3}') +2.5 | bc -l);
+}
+function ischarging()
+{
+	echo $(ioreg -l -n AppleSmartBattery -r | grep ExternalConnected | awk '{print $3}')
 }
