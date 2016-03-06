@@ -9,7 +9,7 @@ TRAPALRM() {
 
 reset="%{$reset_color%}"
 
-fg_color=$'%{\e[38;5;231m%}'
+fg_color=$'%{\e[38;5;015m%}'
 
 home_bg=$reset
 home_fg=$reset
@@ -41,12 +41,17 @@ red_fg=$'%{\e[38;5;124m%}'
 git_bg=$reset
 git_fg=$reset
 
-git_bg_color=$'%{\e[48;5;202m%}'
-git_fg_color=$'%{\e[38;5;202m%}'
-git_bg_color2=$'%{\e[48;5;166m%}'
-git_fg_color2=$'%{\e[38;5;166m%}'
+git_bg_color=$'%{\e[48;5;037m%}'
+git_fg_color=$'%{\e[38;5;037m%}'
+git_bg_color2=$'%{\e[48;5;006m%}'
+git_fg_color2=$'%{\e[38;5;006m%}'
 not_git_bg_color=$'%{\e[48;5;242m%}'
 not_git_fg_color=$'%{\e[38;5;242m%}'
+
+battery_fg_color=$'%{\033[38;5;208m%}'
+battery_bg_color=$'%{\033[48;5;208m%}'
+battery_fg_color2=$'%{\033[38;5;214m%}'
+battery_bg_color2=$'%{\033[48;5;214m%}'
 
 
 time_fg_color=$'%{\e[38;5;25m%}'
@@ -95,6 +100,8 @@ function my_prompt()
 		time_bg=$time_bg_color;
 		host_fg=$host_fg_color;
 		host_bg=$host_bg_color;
+		battery_fg=$battery_fg_color;
+		battery_bg=$battery_bg_color;
 	else
 		unset TOGGLE
 		home_bg=$home_bg_color2
@@ -109,6 +116,8 @@ function my_prompt()
 		time_bg=$time_bg_color2;
 		host_fg=$host_fg_color2;
 		host_bg=$host_bg_color2;
+		battery_fg=$battery_fg_color2;
+		battery_bg=$battery_bg_color2;
 	fi
 
 	if [[ "$my_pwd" == $HOME ]]; then
@@ -197,6 +206,15 @@ function ___Right_Prompt()
 {
 #	git_bg=$not_git_bg_color
 #	git_fg=$not_git_fg_color
+
+	RPROMPT="${host_fg}${host_bg}${fg_color} battery : $(battery_charge)%%"
+	if [[ 50 > $(battery_charge) &&  $(battery_charge) > 25 ]]; then
+		RPROMPT="${battery_fg}${battery_bg}${fg_color} battery : $(battery_charge)%%"
+	fi
+	if [[ 25 > $(battery_charge) ]]; then
+			RPROMPT="${red_fg}${red_bg}${fg_color} battery : $(battery_charge)%%"
+	fi
+
 	if [[ -n $(___Check_Git_Branch) ]]; then
 		if [[ -n $(___Check_Git_Status) ]]; then
 			git_bg=$git_bg_color
@@ -205,17 +223,11 @@ function ___Right_Prompt()
 #		RPROMPT="${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg} ${git_bg}${fg_color} $(___Check_Git_Branch)  ${reset}"
 #		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg}${reset}"
 #		RPROMPT="${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch)  ${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${reset}"
-		RPROMPT="${git_fg}${git_bg} $(___Check_Git_Branch)  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
-	else
+		RPROMPT+=" ${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch) "
+#	else
 #		RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
-		RPROMPT="${host_fg}${host_bg}${fg_color} battery : $(battery_charge)%% ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
-		if [[ 50 > $(battery_charge) &&  $(battery_charge) > 25 ]]; then
-			RPROMPT="${git_fg}${git_bg}${fg_color} battery : $(battery_charge)%% ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
-		fi
-		if [[ 25 > $(battery_charge) ]]; then
-				RPROMPT="${red_fg}${red_bg}${fg_color} battery : $(battery_charge)%% ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
-		fi
 	fi
+	RPROMPT+=" ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 }
 
 function ___Check_Git_Branch()
