@@ -251,5 +251,5 @@ function ___Check_Git_Status()
 }
 function battery_charge()
 {
-	printf %.0f $(echo $(ioreg -l -n AppleSmartBattery -r | grep CurrentCapacity | awk '{print $3}') \* 100 / $(ioreg -l -n AppleSmartBattery -r | grep MaxCapacity | awk '{print $3}') +2.5 | bc -l);
+	printf %.0f $(echo $(ioreg -l -n AppleSmartBattery -r | grep CurrentCapacity | awk '{print $3}') \* 100 / $(ioreg -l -n AppleSmartBattery -r | grep MaxCapacity | awk '{print $3}') +1.5 | bc -l);
 }
