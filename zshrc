@@ -30,6 +30,8 @@ alias l='ls -1'
 alias la='ls -a'
 alias lla='ls -la'
 #---
-alias htop='glances'
+
+#ocaml
+alias ocaml='rlwrap ocaml'
 
 #PS1='[%n@%m][%w][%*] %1~ > '
