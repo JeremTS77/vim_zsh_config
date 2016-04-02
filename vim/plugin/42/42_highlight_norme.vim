@@ -17,7 +17,7 @@
 "                       <jelefebv@student.42.fr>                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-highlight NotAutorised		cterm=italic ctermfg=darkblue ctermbg=black
+highlight NotAutorised		cterm=italic ctermfg=grey ctermbg=darkred
 highlight MyError			ctermbg=darkred
 highlight MyWarning			ctermbg=166
 
