@@ -26,7 +26,7 @@ highlight CursorLine	term=bold cterm=bold	ctermbg=234
 highlight Identifier							ctermfg=11
 highlight Statement								ctermfg=yellow
 highlight String								ctermfg=darkyellow
-highlight Comment								ctermfg=238
+"highlight Comment								ctermfg=darkblue
 highlight PreProc								ctermfg=9
 highlight Type									ctermfg=10
 highlight LineNr								ctermfg=242

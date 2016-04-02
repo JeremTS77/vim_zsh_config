@@ -72,7 +72,7 @@ function!	Update_Ocamlheader_42()
 	let l:pattern = "(*   Updated:"
 	let l:line = getline(9)
 	if match(l:line, l:pattern) != -1
-		call Insert_header_42_add_info("Updated", "###   ########.fr       *)", 9, 1)
+		call Insert_Ocamlheader_42_add_info("Updated", "###   ########.fr       *)", 9, 1)
 	endif
 	unlet s:author
 endfunction
