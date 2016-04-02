@@ -218,6 +218,10 @@ function ___Right_Prompt()
 		power_fg=$red_fg
 		power_bg=$red_bg
 	fi
+	if [[ 100 == $(battery_charge) ]]; then
+		power_fg=$host_fg
+		power_bg=$host_bg
+	fi
 	if [[ $(ischarging) == "Yes" ]]; then
 		power_fg=$root_fg
 		power_bg=$root_bg
@@ -226,13 +230,13 @@ function ___Right_Prompt()
 
 	if [[ -n $(___Check_Git_Branch) ]]; then
 		if [[ -n $(___Check_Git_Status) ]]; then
-			git_bg=$git_bg_color
-			git_fg=$git_fg_color
+			#git_bg=$git_bg_color
+			#git_fg=$git_fg_color
 		fi
 #		RPROMPT="${not_git_fg_color}${not_git_bg_color}${fg_color} %D{%H:%M:%S} ${git_fg} ${git_bg}${fg_color} $(___Check_Git_Branch)  ${reset}"
 		RPROMPT+=" ${git_fg}${git_bg}${fg_color} $(___Check_Git_Branch) "
-	#	else
-	#		RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
+#		else
+#			RPROMPT="${host_fg}${host_bg} ${fg_color}%m 💻  ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 	fi
 	RPROMPT+=" ${time_fg}${time_bg}${fg_color} %D{%H:%M:%S} ${reset}"
 }
@@ -258,7 +262,7 @@ function ___Check_Git_Status()
 }
 function battery_charge()
 {
-	printf %.0f $(echo $(ioreg -l -n AppleSmartBattery -r | grep CurrentCapacity | awk '{print $3}') \* 100 / $(ioreg -l -n AppleSmartBattery -r | grep MaxCapacity | awk '{print $3}') +1.5 | bc -l);
+	printf %.0f $(echo $(ioreg -l -n AppleSmartBattery -r | grep CurrentCapacity | awk '{print $3}') \* 100 / $(ioreg -l -n AppleSmartBattery -r | grep MaxCapacity | awk '{print $3}') | bc -l);
 }
 function ischarging()
 {
