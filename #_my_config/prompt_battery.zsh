@@ -207,18 +207,18 @@ function ___Right_Prompt()
 #	git_bg=$not_git_bg_color
 #	git_fg=$not_git_fg_color
 
-	power_fg=$red_fg
-	power_bg=$red_bg
-	if [[ 50 > $(battery_charge) &&  $(battery_charge) > 25 ]]; then
+	#power_fg=$red_fg
+	#power_bg=$red_bg
+	if [[ 50 -gt $(battery_charge) &&  $(battery_charge) -gt 25 ]]; then
 		power_fg=$battery_fg
 		power_bg=$battery_bg
 
 	fi
-	if [[ 26 > $(battery_charge) ]]; then
+	if [[ 26 -gt $(battery_charge) ]]; then
 		power_fg=$red_fg
 		power_bg=$red_bg
 	fi
-	if [[ 100 == $(battery_charge) ]]; then
+	if [[ 100 -eq $(battery_charge) ]]; then
 		power_fg=$host_fg
 		power_bg=$host_bg
 	fi
