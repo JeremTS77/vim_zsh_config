@@ -218,7 +218,7 @@ function ___Right_Prompt()
 		power_fg=$red_fg
 		power_bg=$red_bg
 	fi
-	if [[ 100 -gt $(battery_charge) && $(battery_charge) -gt 50 ]]; then
+	if [[ 100 -ge $(battery_charge) && $(battery_charge) -ge 50 ]]; then
 		power_fg=$host_fg
 		power_bg=$host_bg
 	fi
